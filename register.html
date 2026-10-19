@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — FinTrack Personal Finance</title>
+  <meta name="description" content="Create a new FinTrack account to start budgeting and saving in Indian Rupees.">
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 py-5">
+
+  <div class="container" style="max-width: 480px;">
+    <!-- Brand Header -->
+    <div class="text-center mb-4">
+      <div class="d-inline-flex align-items-center justify-content-center brand-icon mb-2" style="width: 44px; height: 44px; font-size: 1.25rem;">
+        <i class="bi bi-wallet2"></i>
+      </div>
+      <h1 class="h4 fw-bold text-dark mb-1 tracking-tight">FinTrack</h1>
+      <p class="text-secondary text-sm">Personal Finance &amp; Savings Management</p>
+    </div>
+
+    <!-- Register Card -->
+    <div class="card-ft p-4 p-sm-5 bg-white">
+      <h2 class="h5 fw-bold text-dark mb-1">Create Your Account</h2>
+      <p class="text-muted text-xs mb-4">Start managing your personal income, expenses, and savings targets.</p>
+
+      <!-- Error Alert -->
+      <div id="authErrorAlert" class="alert alert-danger text-xs py-2 px-3 d-none mb-3" role="alert"></div>
+
+      <form id="registerForm">
+        <div class="mb-3">
+          <label for="regFullName" class="form-label text-xs fw-semibold text-secondary">Full Name</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border text-muted"><i class="bi bi-person"></i></span>
+            <input 
+              type="text" 
+              class="form-control form-control-ft" 
+              id="regFullName" 
+              placeholder="e.g. Rahul Sharma" 
+              required
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="regEmail" class="form-label text-xs fw-semibold text-secondary">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border text-muted"><i class="bi bi-envelope"></i></span>
+            <input 
+              type="email" 
+              class="form-control form-control-ft" 
+              id="regEmail" 
+              placeholder="name@example.in" 
+              required
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="regPassword" class="form-label text-xs fw-semibold text-secondary">Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border text-muted"><i class="bi bi-lock"></i></span>
+            <input 
+              type="password" 
+              class="form-control form-control-ft" 
+              id="regPassword" 
+              placeholder="Minimum 8 characters" 
+              required
+              minlength="8"
+            >
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="regConfirmPassword" class="form-label text-xs fw-semibold text-secondary">Confirm Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border text-muted"><i class="bi bi-lock-fill"></i></span>
+            <input 
+              type="password" 
+              class="form-control form-control-ft" 
+              id="regConfirmPassword" 
+              placeholder="Re-enter password" 
+              required
+              minlength="8"
+            >
+          </div>
+        </div>
+
+        <button type="submit" id="regSubmitBtn" class="btn btn-ft-primary w-100 py-2">
+          Create FinTrack Account
+        </button>
+      </form>
+
+      <div class="text-center border-top mt-4 pt-3 text-xs text-muted">
+        Already registered? 
+        <a href="login.html" class="text-primary fw-semibold text-decoration-none">Sign In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

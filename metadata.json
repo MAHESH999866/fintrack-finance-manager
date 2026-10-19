@@ -1,0 +1,6 @@
+{
+  "name": "FinTrack — MySQL Database Design & Persistence Studio",
+  "description": "Production MySQL 8.x schema, Flyway migrations, Java 21 / Spring Boot 3 JPA entities, repositories, and Indian Rupee (INR) financial reporting queries for FinTrack.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

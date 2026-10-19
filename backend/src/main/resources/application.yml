@@ -1,0 +1,76 @@
+# ==============================================================================
+# FinTrack Spring Boot 3.x / Java 21 Application Configuration
+# ==============================================================================
+
+spring:
+  application:
+    name: fintrack-core-api
+
+  # ----------------------------------------------------------------------------
+  # MySQL 8.x DataSource Configuration
+  # Production Credentials should be injected via Environment Variables:
+  # DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD
+  # ----------------------------------------------------------------------------
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:fintrack_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata&characterEncoding=UTF-8
+    username: ${DB_USERNAME:fintrack_user}
+    password: ${DB_PASSWORD:fintrack_pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: FinTrackHikariPool
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 20000
+      leak-detection-threshold: 30000
+
+  # ----------------------------------------------------------------------------
+  # Flyway Database Schema Migration
+  # ----------------------------------------------------------------------------
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+    table: flyway_schema_history
+    validate-on-migrate: true
+    out-of-order: false
+
+  # ----------------------------------------------------------------------------
+  # Spring Data JPA & Hibernate
+  # Notice: ddl-auto is set to 'validate'. Flyway manages all DDL schema mutations.
+  # ----------------------------------------------------------------------------
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 30
+          order_inserts: true
+          order_updates: true
+        connection:
+          provider_disables_autocommit: true
+
+# ------------------------------------------------------------------------------
+# FinTrack Business & Regional Localization Settings
+# Default Currency: INR (₹ - Indian Rupee)
+# TimeZone: Asia/Kolkata (IST)
+# ------------------------------------------------------------------------------
+fintrack:
+  currency:
+    default-code: INR
+    symbol: "₹"
+    decimal-scale: 2
+  timezone: Asia/Kolkata
+  audit:
+    enabled: true
+  jwt:
+    secret: ${JWT_SECRET:fintrack-secure-jwt-signing-secret-key-for-sha256-minimum-32-chars!}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000} # 24 hours

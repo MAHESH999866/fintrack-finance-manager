@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: fintrack-test
+  datasource:
+    url: jdbc:h2:mem:fintrack_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  flyway:
+    enabled: false
+
+fintrack:
+  currency:
+    default-code: INR
+    symbol: "₹"
+    decimal-scale: 2
+  timezone: Asia/Kolkata
+  jwt:
+    secret: fintrack-test-secret-key-for-sha256-signing-must-be-32-chars-long!
+    expiration-ms: 3600000

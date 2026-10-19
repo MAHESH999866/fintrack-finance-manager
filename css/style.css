@@ -1,0 +1,568 @@
+/* ==============================================================================
+   FinTrack — Personal Finance & Savings Management System
+   Custom SaaS Dashboard Stylesheet (Bootstrap 5.3 Companion)
+   Design: Clean, Trustworthy, Light Theme with Deep Blue (#0d6efd / #1e40af)
+   Currency Standard: Indian Rupee (₹ / INR)
+   ============================================================================== */
+
+:root {
+  --ft-primary: #1e40af;
+  --ft-primary-light: #eff6ff;
+  --ft-primary-hover: #1d4ed8;
+  --ft-success: #15803d;
+  --ft-success-light: #f0fdf4;
+  --ft-warning: #b45309;
+  --ft-warning-light: #fefce8;
+  --ft-danger: #b91c1c;
+  --ft-danger-light: #fef2f2;
+  --ft-bg-main: #f8fafc;
+  --ft-card-bg: #ffffff;
+  --ft-border: #e2e8f0;
+  --ft-border-subtle: #f1f5f9;
+  --ft-text-primary: #0f172a;
+  --ft-text-secondary: #475569;
+  --ft-text-muted: #94a3b8;
+  --ft-sidebar-width: 260px;
+  --ft-topbar-height: 64px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--ft-bg-main);
+  color: var(--ft-text-primary);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular Numerals for all monetary values */
+.tabular-nums, .ft-amount, .font-mono {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ------------------------------------------------------------------------------
+   App Layout: Sidebar + Main Content Viewport
+   ------------------------------------------------------------------------------ */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: var(--ft-sidebar-width);
+  background-color: #ffffff;
+  border-right: 1px solid var(--ft-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1020;
+  transition: transform 0.25s ease-in-out;
+}
+
+.sidebar-header {
+  height: var(--ft-topbar-height);
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ft-border-subtle);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--ft-text-primary);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.sidebar-nav {
+  padding: 1rem 0.75rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ft-text-muted);
+  padding: 0.75rem 0.75rem 0.35rem 0.75rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  color: var(--ft-text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  margin-bottom: 2px;
+}
+
+.sidebar-link i {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-link:hover {
+  background-color: var(--ft-primary-light);
+  color: var(--ft-primary);
+}
+
+.sidebar-link.active {
+  background-color: var(--ft-primary-light);
+  color: var(--ft-primary);
+  font-weight: 600;
+}
+
+.sidebar-link.active i {
+  color: var(--ft-primary);
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--ft-border-subtle);
+  background-color: #ffffff;
+}
+
+.user-snippet {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e0e7ff;
+  color: var(--ft-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.user-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ft-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: var(--ft-text-muted);
+}
+
+/* Main Content Wrapper */
+.app-main {
+  margin-left: var(--ft-sidebar-width);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--ft-bg-main);
+}
+
+/* Top Navigation Bar */
+.app-topbar {
+  height: var(--ft-topbar-height);
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--ft-border);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1010;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Content Area */
+.app-content {
+  padding: 1.75rem 1.5rem 3rem 1.5rem;
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------------------
+   Cards, Tables, and Data Displays
+   ------------------------------------------------------------------------------ */
+.card-ft {
+  background-color: var(--ft-card-bg);
+  border: 1px solid var(--ft-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  margin-bottom: 1.25rem;
+  transition: box-shadow 0.15s ease;
+}
+
+.card-ft-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--ft-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-ft-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ft-text-primary);
+  margin: 0;
+}
+
+.card-ft-subtitle {
+  font-size: 0.8rem;
+  color: var(--ft-text-muted);
+  margin-top: 0.15rem;
+}
+
+.card-ft-body {
+  padding: 1.25rem;
+}
+
+/* Stat Summary Widget Cards */
+.stat-widget {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid var(--ft-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  height: 100%;
+}
+
+.stat-widget-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ft-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-widget-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ft-text-primary);
+  margin: 0.4rem 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.stat-widget-meta {
+  font-size: 0.75rem;
+  color: var(--ft-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Tables */
+.table-ft {
+  width: 100%;
+  margin-bottom: 0;
+  color: var(--ft-text-primary);
+  font-size: 0.85rem;
+}
+
+.table-ft thead th {
+  background-color: #f8fafc;
+  color: var(--ft-text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.725rem;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ft-border);
+  white-space: nowrap;
+}
+
+.table-ft tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ft-border-subtle);
+  vertical-align: middle;
+}
+
+.table-ft tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Badges */
+.badge-ft {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-ft-income {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge-ft-expense {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-ft-neutral {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.badge-ft-warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+/* Custom Buttons */
+.btn-ft-primary {
+  background-color: var(--ft-primary);
+  color: #ffffff;
+  border: 1px solid var(--ft-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-ft-primary:hover {
+  background-color: var(--ft-primary-hover);
+  border-color: var(--ft-primary-hover);
+  color: #ffffff;
+}
+
+.btn-ft-outline {
+  background-color: #ffffff;
+  color: var(--ft-text-secondary);
+  border: 1px solid var(--ft-border);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-ft-outline:hover {
+  background-color: #f8fafc;
+  color: var(--ft-text-primary);
+  border-color: #cbd5e1;
+}
+
+/* Form Controls */
+.form-control-ft, .form-select-ft {
+  border: 1px solid var(--ft-border);
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.875rem;
+  color: var(--ft-text-primary);
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control-ft:focus, .form-select-ft:focus {
+  border-color: var(--ft-primary);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  outline: none;
+}
+
+/* ------------------------------------------------------------------------------
+   On-Demand AI Finance Assistant Panel
+   ------------------------------------------------------------------------------ */
+.floating-chat-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.3), 0 4px 6px -4px rgba(30, 64, 175, 0.2);
+  border: none;
+  cursor: pointer;
+  z-index: 1040;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.floating-chat-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.chat-panel-container {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  width: 380px;
+  max-width: calc(100vw - 2rem);
+  height: 520px;
+  max-height: calc(100vh - 7rem);
+  background-color: #ffffff;
+  border: 1px solid var(--ft-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  z-index: 1045;
+  overflow: hidden;
+  animation: chatSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes chatSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-header {
+  padding: 0.85rem 1rem;
+  background-color: #1e40af;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: #f8fafc;
+}
+
+.message-bubble {
+  max-width: 85%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  font-size: 0.825rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.message-user {
+  align-self: flex-end;
+  background-color: var(--ft-primary);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.message-assistant {
+  align-self: flex-start;
+  background-color: #ffffff;
+  color: var(--ft-text-primary);
+  border: 1px solid var(--ft-border);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-footer {
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-top: 1px solid var(--ft-border);
+}
+
+.chat-prompt-chip {
+  font-size: 0.725rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: var(--ft-text-secondary);
+  border: 1px solid var(--ft-border-subtle);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chat-prompt-chip:hover {
+  background-color: var(--ft-primary-light);
+  color: var(--ft-primary);
+}
+
+/* ------------------------------------------------------------------------------
+   Mobile Responsiveness
+   ------------------------------------------------------------------------------ */
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .app-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .app-main {
+    margin-left: 0;
+  }
+
+  .chat-panel-container {
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    bottom: 5rem;
+    height: 480px;
+  }
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthly Financial Plan — FinTrack</title>
+  <meta name="description" content="Plan monthly income, target savings, and category budgets in Indian Rupees.">
+  <!-- Bootstrap 5.3 CSS & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Left Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header d-flex justify-content-between align-items-center">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-icon">
+            <i class="bi bi-wallet2"></i>
+          </div>
+          <span>FinTrack</span>
+        </a>
+        <button type="button" class="btn btn-sm btn-link text-muted d-lg-none" id="sidebarCloseBtn">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Overview</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <i class="bi bi-grid-1x2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="monthly-plan.html" class="sidebar-link active">
+          <i class="bi bi-calendar-check-fill"></i>
+          <span>Monthly Plan</span>
+        </a>
+
+        <div class="nav-section-title">Ledger &amp; Planning</div>
+        <a href="transactions.html" class="sidebar-link">
+          <i class="bi bi-arrow-left-right"></i>
+          <span>Transactions</span>
+        </a>
+        <a href="budgets.html" class="sidebar-link">
+          <i class="bi bi-pie-chart"></i>
+          <span>Budgets</span>
+        </a>
+        <a href="savings-goals.html" class="sidebar-link">
+          <i class="bi bi-piggy-bank"></i>
+          <span>Savings Goals</span>
+        </a>
+        <a href="reports.html" class="sidebar-link">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title">Assistant &amp; Tools</div>
+        <a href="#" class="sidebar-link" id="sidebarAiLink">
+          <i class="bi bi-chat-square-dots text-primary"></i>
+          <span>AI Finance Assistant</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <i class="bi bi-person-gear"></i>
+          <span>Profile &amp; Settings</span>
+        </a>
+        <a href="#" class="sidebar-link text-danger action-logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar user-avatar-display">RS</div>
+          <div class="user-details">
+            <div class="user-name user-name-display">Rahul Sharma</div>
+            <div class="user-role font-mono text-[11px]">INR Account · Active</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="btn btn-sm btn-ft-outline d-lg-none" id="sidebarToggleBtn">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-light text-secondary border font-mono">
+              <i class="bi bi-calendar3 me-1"></i> October 2026
+            </span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn btn-sm btn-ft-primary d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#quickAddTransactionModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>Add Transaction</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="app-content">
+        <!-- Page Title -->
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-4">
+          <div>
+            <h1 class="h4 fw-bold text-dark mb-0">Monthly Financial Planning Wizard</h1>
+            <p class="text-muted text-xs mb-0 mt-1">
+              Plan your expected income, set an intentional target savings goal, and allocate spending caps by category in Indian Rupees.
+            </p>
+          </div>
+          <span class="badge bg-light text-secondary border font-mono text-xs">
+            Plan Month: October 2026
+          </span>
+        </div>
+
+        <!-- Over Allocation Live Alert Banner -->
+        <div id="planOverAllocationAlert" class="mb-4"></div>
+
+        <div class="row g-4">
+          <!-- Left: Step-by-Step Planning Form -->
+          <div class="col-12 col-lg-8">
+            <form id="monthlyPlanForm" class="space-y-4">
+              <!-- Step 1 & 2 Card: Income & Savings Target -->
+              <div class="card-ft">
+                <div class="card-ft-header">
+                  <h3 class="card-ft-title">Step 1 &amp; 2: Income Expectation &amp; Target Savings</h3>
+                  <span class="badge bg-light text-primary border text-xs font-mono">Foundational Inflow</span>
+                </div>
+                <div class="card-ft-body">
+                  <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                      <label for="planExpectedIncome" class="form-label text-xs fw-semibold text-secondary">
+                        Expected In-Hand Monthly Income (INR)
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light border text-muted">₹</span>
+                        <input 
+                          type="number" 
+                          step="500" 
+                          min="0" 
+                          id="planExpectedIncome" 
+                          class="form-control form-control-ft font-mono" 
+                          value="125000" 
+                          required
+                        >
+                      </div>
+                      <div class="text-[11px] text-muted mt-1">Include salary, freelance retainers, and regular yields.</div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label for="planTargetSavings" class="form-label text-xs fw-semibold text-secondary">
+                        Target Savings Allocation (INR)
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light border text-muted">₹</span>
+                        <input 
+                          type="number" 
+                          step="500" 
+                          min="0" 
+                          id="planTargetSavings" 
+                          class="form-control form-control-ft font-mono" 
+                          value="35000" 
+                          required
+                        >
+                      </div>
+                      <div class="text-[11px] text-muted mt-1">Intentional savings routed to Emergency Fund or investments.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 Card: Category Expense Budgets -->
+              <div class="card-ft">
+                <div class="card-ft-header">
+                  <div>
+                    <h3 class="card-ft-title">Step 3: Category Expense Budgets</h3>
+                    <div class="card-ft-subtitle">Allocate realistic maximum monthly spending limits across categories</div>
+                  </div>
+                </div>
+                <div class="card-ft-body">
+                  <div class="row g-2" id="planCategoriesContainer">
+                    <!-- Populated dynamically by monthly-plan.js -->
+                  </div>
+
+                  <div class="mt-3">
+                    <label for="planNotes" class="form-label text-xs fw-semibold text-secondary">Notes &amp; Festive Remarks (Optional)</label>
+                    <textarea 
+                      class="form-control form-control-ft text-xs" 
+                      id="planNotes" 
+                      rows="2" 
+                      placeholder="e.g. Diwali festive month budget with ₹35,000 target savings into Emergency Fund."
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="card-ft-header bg-light border-top d-flex justify-content-between align-items-center">
+                  <span class="text-xs text-muted">Changes are saved to your active MySQL 8 database schema.</span>
+                  <button type="submit" class="btn btn-ft-primary px-4">
+                    <i class="bi bi-check2-circle me-1"></i> Save Monthly Plan
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: Live Financial Summary Breakdown -->
+          <div class="col-12 col-lg-4">
+            <div class="card-ft sticky-top" style="top: calc(var(--ft-topbar-height) + 1.5rem);">
+              <div class="card-ft-header">
+                <h3 class="card-ft-title">Step 4: Live Budget Balance Summary</h3>
+                <span class="badge bg-light text-secondary border font-mono text-[10px]">INR Standards</span>
+              </div>
+              <div class="card-ft-body space-y-3">
+                <div class="d-flex justify-content-between align-items-center text-xs pb-2 border-bottom">
+                  <span class="text-secondary">Expected Income</span>
+                  <span class="fw-bold font-mono text-dark" id="summaryIncome">₹ 0.00</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center text-xs pb-2 border-bottom">
+                  <div>
+                    <span class="text-secondary d-block">Target Savings</span>
+                    <span class="text-muted text-[10px]" id="summaryTargetSavingsPct">0.0% of Income</span>
+                  </div>
+                  <span class="fw-bold font-mono text-primary" id="summaryTargetSavings">₹ 0.00</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center text-xs pb-2 border-bottom">
+                  <div>
+                    <span class="text-secondary d-block">Total Planned Expenses</span>
+                    <span class="text-muted text-[10px]" id="summaryPlannedExpensesPct">0.0% of Income</span>
+                  </div>
+                  <span class="fw-bold font-mono text-danger" id="summaryPlannedExpenses">₹ 0.00</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center text-xs pt-1">
+                  <div>
+                    <span class="fw-semibold text-dark d-block">Remaining Unallocated</span>
+                    <span class="text-muted text-[10px]">Income - (Savings + Expenses)</span>
+                  </div>
+                  <span class="fw-bold font-mono" id="summaryRemaining">₹ 0.00</span>
+                </div>
+
+                <!-- Educational Accounting Note -->
+                <div class="p-2.5 rounded-3 bg-light border text-[11px] text-muted mt-3">
+                  <i class="bi bi-shield-check text-primary me-1"></i>
+                  <strong>FinTrack Accounting Rule:</strong> Planned savings is an intentional target. Actual savings will be computed from recorded transactions at month-end.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Global Quick Add Transaction Modal -->
+  <div class="modal fade" id="quickAddTransactionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fs-6 fw-bold text-dark">
+            <i class="bi bi-plus-circle me-1 text-primary"></i> Record Financial Transaction
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="quickAddTransactionForm">
+          <div class="modal-body p-4">
+            <div class="row g-3">
+              <div class="col-6">
+                <label class="form-label text-xs fw-semibold text-secondary">Transaction Type</label>
+                <select class="form-select form-select-ft" id="qaType" required>
+                  <option value="EXPENSE" selected>Expense</option>
+                  <option value="INCOME">Income</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label text-xs fw-semibold text-secondary">Amount (INR)</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border text-muted">₹</span>
+                  <input type="number" step="0.01" min="0.01" class="form-control form-control-ft" id="qaAmount" placeholder="0.00" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label text-xs fw-semibold text-secondary">Description</label>
+                <input type="text" class="form-control form-control-ft" id="qaDescription" placeholder="e.g. Swiggy, BESCOM bill" required>
+              </div>
+              <div class="col-6">
+                <label class="form-label text-xs fw-semibold text-secondary">Category</label>
+                <select class="form-select form-select-ft" id="qaCategory" required></select>
+              </div>
+              <div class="col-6">
+                <label class="form-label text-xs fw-semibold text-secondary">Payment Method</label>
+                <select class="form-select form-select-ft" id="qaPaymentMethod" required>
+                  <option value="UPI">UPI</option>
+                  <option value="CASH">Cash</option>
+                  <option value="DEBIT_CARD">Debit Card</option>
+                  <option value="CREDIT_CARD">Credit Card</option>
+                  <option value="BANK_TRANSFER">Bank Transfer</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label text-xs fw-semibold text-secondary">Date</label>
+                <input type="date" class="form-control form-control-ft" id="qaDate" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-top bg-light">
+            <button type="button" class="btn btn-sm btn-ft-outline" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-ft-primary">Save Transaction</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chat Assistant -->
+  <button type="button" class="floating-chat-btn" id="floatingChatBtn">
+    <i class="bi bi-chat-dots-fill"></i>
+  </button>
+  <div class="chat-panel-container" id="aiChatPanel" style="display: none;">
+    <div class="chat-header">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-robot fs-5"></i>
+        <div class="fw-semibold text-sm">FinTrack AI Assistant</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white btn-sm" id="chatCloseBtn"></button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-footer">
+      <div class="input-group">
+        <textarea class="form-control form-control-ft text-xs" id="chatInput" rows="1" placeholder="Ask AI..."></textarea>
+        <button class="btn btn-ft-primary px-3" type="button" id="chatSendBtn"><i class="bi bi-send-fill"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/monthly-plan.js"></script>
+</body>
+</html>

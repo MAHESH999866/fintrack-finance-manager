@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile &amp; Settings — FinTrack</title>
+  <meta name="description" content="Manage your personal profile, credentials, and currency settings in FinTrack.">
+  <!-- Bootstrap 5.3 CSS & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Left Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header d-flex justify-content-between align-items-center">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-icon">
+            <i class="bi bi-wallet2"></i>
+          </div>
+          <span>FinTrack</span>
+        </a>
+        <button type="button" class="btn btn-sm btn-link text-muted d-lg-none" id="sidebarCloseBtn">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Overview</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <i class="bi bi-grid-1x2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="monthly-plan.html" class="sidebar-link">
+          <i class="bi bi-calendar-check"></i>
+          <span>Monthly Plan</span>
+        </a>
+
+        <div class="nav-section-title">Ledger &amp; Planning</div>
+        <a href="transactions.html" class="sidebar-link">
+          <i class="bi bi-arrow-left-right"></i>
+          <span>Transactions</span>
+        </a>
+        <a href="budgets.html" class="sidebar-link">
+          <i class="bi bi-pie-chart"></i>
+          <span>Budgets</span>
+        </a>
+        <a href="savings-goals.html" class="sidebar-link">
+          <i class="bi bi-piggy-bank"></i>
+          <span>Savings Goals</span>
+        </a>
+        <a href="reports.html" class="sidebar-link">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title">Assistant &amp; Tools</div>
+        <a href="#" class="sidebar-link" id="sidebarAiLink">
+          <i class="bi bi-chat-square-dots text-primary"></i>
+          <span>AI Finance Assistant</span>
+        </a>
+        <a href="profile.html" class="sidebar-link active">
+          <i class="bi bi-person-gear-fill"></i>
+          <span>Profile &amp; Settings</span>
+        </a>
+        <a href="#" class="sidebar-link text-danger action-logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar user-avatar-display">RS</div>
+          <div class="user-details">
+            <div class="user-name user-name-display">Rahul Sharma</div>
+            <div class="user-role font-mono text-[11px]">INR Account · Active</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="app-main">
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="btn btn-sm btn-ft-outline d-lg-none" id="sidebarToggleBtn">
+            <i class="bi bi-list"></i>
+          </button>
+          <span class="text-xs text-muted font-mono">Account Settings · User ID: 101</span>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn btn-sm btn-ft-outline text-danger action-logout">
+            <i class="bi bi-box-arrow-right me-1"></i> Sign Out
+          </button>
+        </div>
+      </header>
+
+      <main class="app-content">
+        <!-- Page Title -->
+        <div class="mb-4">
+          <h1 class="h4 fw-bold text-dark mb-0">Profile &amp; Account Settings</h1>
+          <p class="text-muted text-xs mb-0 mt-1">
+            Manage your personal profile details, preferred currency, password, and test data state.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Profile Information Card -->
+          <div class="col-12 col-lg-6">
+            <div class="card-ft">
+              <div class="card-ft-header">
+                <h3 class="card-ft-title">Profile Information</h3>
+                <span class="badge bg-light text-secondary border font-mono text-[10px]">Personal Details</span>
+              </div>
+              <div class="card-ft-body">
+                <form id="profileForm">
+                  <div class="mb-3">
+                    <label for="profileFullName" class="form-label text-xs fw-semibold text-secondary">Full Name</label>
+                    <input type="text" class="form-control form-control-ft" id="profileFullName" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="profileEmail" class="form-label text-xs fw-semibold text-secondary">Email Address</label>
+                    <input type="email" class="form-control form-control-ft bg-light" id="profileEmail" readonly>
+                    <div class="text-[11px] text-muted mt-1">Email is locked to your account identity.</div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="profileCurrency" class="form-label text-xs fw-semibold text-secondary">Preferred Accounting Currency</label>
+                    <select class="form-select form-select-ft" id="profileCurrency">
+                      <option value="INR" selected>Indian Rupee (INR / ₹)</option>
+                    </select>
+                    <div class="text-[11px] text-muted mt-1">First release strictly enforces Indian Rupee (INR).</div>
+                  </div>
+                  <button type="submit" class="btn btn-ft-primary">Update Profile</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Danger Zone / Reset Demo Data -->
+            <div class="card-ft border-danger-subtle mt-4">
+              <div class="card-ft-header bg-danger-subtle text-danger border-bottom">
+                <h3 class="card-ft-title text-danger">Reset Environment Data</h3>
+              </div>
+              <div class="card-ft-body">
+                <p class="text-xs text-muted mb-3">
+                  Reset your local data to the default October 2026 Indian sample dataset (Rahul Sharma, Bengaluru, ₹1.25L monthly plan, Diwali festive transactions).
+                </p>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="resetDataBtn">
+                  <i class="bi bi-arrow-counterclockwise me-1"></i> Reset to Sample Dataset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password Security Card -->
+          <div class="col-12 col-lg-6">
+            <div class="card-ft">
+              <div class="card-ft-header">
+                <h3 class="card-ft-title">Change Password</h3>
+                <span class="badge bg-light text-secondary border font-mono text-[10px]">Spring Security</span>
+              </div>
+              <div class="card-ft-body">
+                <form id="changePasswordForm">
+                  <div class="mb-3">
+                    <label for="currentPassword" class="form-label text-xs fw-semibold text-secondary">Current Password</label>
+                    <input type="password" class="form-control form-control-ft" id="currentPassword" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="newPassword" class="form-label text-xs fw-semibold text-secondary">New Password</label>
+                    <input type="password" class="form-control form-control-ft" id="newPassword" minlength="8" required>
+                    <div class="text-[11px] text-muted mt-1">Must be at least 8 characters long.</div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="confirmNewPassword" class="form-label text-xs fw-semibold text-secondary">Confirm New Password</label>
+                    <input type="password" class="form-control form-control-ft" id="confirmNewPassword" minlength="8" required>
+                  </div>
+                  <button type="submit" class="btn btn-ft-outline">Update Password</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Security & Invariants Card -->
+            <div class="card-ft mt-4">
+              <div class="card-ft-header">
+                <h3 class="card-ft-title">Security &amp; Architectural Invariants</h3>
+              </div>
+              <div class="card-ft-body text-xs text-secondary space-y-2">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-success"></i>
+                  <span>Passwords hashed using BCrypt (`$2a$10$...`)</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-success"></i>
+                  <span>Zero plaintext banking credentials, UPI PINs, or OTPs stored</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-success"></i>
+                  <span>All database queries strictly scoped by authenticated user ID</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-success"></i>
+                  <span>Amounts protected via MySQL `DECIMAL(15,2)` &amp; Java `BigDecimal`</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Floating Chat Assistant -->
+  <button type="button" class="floating-chat-btn" id="floatingChatBtn">
+    <i class="bi bi-chat-dots-fill"></i>
+  </button>
+  <div class="chat-panel-container" id="aiChatPanel" style="display: none;">
+    <div class="chat-header">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-robot fs-5"></i>
+        <div class="fw-semibold text-sm">FinTrack AI Assistant</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white btn-sm" id="chatCloseBtn"></button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-footer">
+      <div class="input-group">
+        <textarea class="form-control form-control-ft text-xs" id="chatInput" rows="1" placeholder="Ask AI..."></textarea>
+        <button class="btn btn-ft-primary px-3" type="button" id="chatSendBtn"><i class="bi bi-send-fill"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
