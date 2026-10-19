@@ -812,7 +812,7 @@ app.post(['/api/chat', '/api/v1/chat'], async (req, res) => {
   const apiKey = process.env.GEMINI_API_KEY;
   if (apiKey && apiKey !== 'MY_GEMINI_API_KEY') {
     try {
-      const ai = new GoogleGenAI();
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const prompt = `You are FinTrack AI, an expert Indian personal finance advisor and budgeting mentor.
 You communicate professionally, warmly, and realistically, using Indian Rupees (₹), Indian comma numbering (e.g., ₹1,25,000, ₹75,000), and contextual advice tailored to Indian professionals, UPI payments, Indian festive spending (e.g. Diwali shopping), and household expenses.
 
@@ -838,10 +838,16 @@ User Query: "${userMessage}"
 
 Provide a concise, helpful, actionable response (1-3 brief paragraphs or bullet points). Always reference specific verified figures from the records when relevant.`;
 
-      const response = await ai.models.generateContent({
+      const apiCall = ai.models.generateContent({
         model: 'gemini-3.8-flash',
         contents: prompt
       });
+
+      const timeoutPromise = new Promise<never>((_, reject) => 
+        setTimeout(() => reject(new Error('Gemini API call timed out')), 6000)
+      );
+
+      const response = await Promise.race([apiCall, timeoutPromise]);
 
       if (response && response.text) {
         return res.json({
@@ -850,7 +856,7 @@ Provide a concise, helpful, actionable response (1-3 brief paragraphs or bullet 
         });
       }
     } catch (err: any) {
-      console.warn('[FinTrack AI] Gemini API call note:', err?.message);
+      console.warn('[FinTrack AI] Gemini API note:', err?.message);
     }
   }
 
